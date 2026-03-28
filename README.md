@@ -223,6 +223,23 @@ gcloud run services describe cloud-run-lab \
   --format "value(status.url)" \
   --project $PROJECT_ID
 ```
+
+---
+
+## Changes
+
+| Feature | Base Lab | This Lab |
+|---|---|---|
+| Dataset | USA baby names (Texas) | GitHub public repo licenses |
+| Upload format | Plain `.txt` file | Versioned JSON metadata |
+| API response | Plain text strings | Structured JSON |
+| UI | None | Dark-themed HTML dashboard |
+| Dashboard | None | Live stat cards + table + progress bars |
+| Extra endpoints | None | `/dashboard`, `/health` |
+| Docker base | `python:3.9` | `python:3.9-slim` (smaller image) |
+| Gunicorn workers | 1 | 2 (better concurrency) |
+
+---
 ---
 
 ## Monitoring & Logs
