@@ -1,6 +1,6 @@
 # Cloud Run Lab
 
-A containerized Flask web application deployed on **Google Cloud Run**, integrated with **BigQuery** and **Cloud Storage**. Built as part of an MLOps course lab — queries the GitHub public dataset on BigQuery and surfaces results through a dark-themed interactive dashboard.
+A containerized Flask web application deployed on **Google Cloud Run**, integrated with **BigQuery** and **Cloud Storage**.Queries the GitHub public dataset on BigQuery.
 
 **Live URL:** https://cloud-run-lab-213347562818.us-central1.run.app
 
@@ -53,23 +53,6 @@ Browser / curl
 2. Cloud Run pulls the image and runs it on managed infrastructure
 3. Service account grants the container permission to read BigQuery and write to Cloud Storage
 4. `BUCKET_NAME` environment variable is injected at deploy time
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Language | Python 3.9 |
-| Web Framework | Flask 2.3 |
-| Production Server | Gunicorn (2 workers) |
-| Containerization | Docker (linux/amd64) |
-| Container Registry | Google Container Registry (GCR) |
-| Compute | Google Cloud Run (managed) |
-| Data Warehouse | Google BigQuery |
-| Object Storage | Google Cloud Storage |
-| Dataset | `bigquery-public-data.github_repos.licenses` |
-
 ---
 
 ## Project Structure
@@ -240,22 +223,6 @@ gcloud run services describe cloud-run-lab \
   --format "value(status.url)" \
   --project $PROJECT_ID
 ```
-
----
-
-## What Makes This Different from the Base Lab
-
-| Feature | Base Lab | This Lab |
-|---|---|---|
-| Dataset | USA baby names (Texas) | GitHub public repo licenses |
-| Upload format | Plain `.txt` file | Versioned JSON metadata |
-| API response | Plain text strings | Structured JSON |
-| UI | None | Dark-themed HTML dashboard |
-| Dashboard | None | Live stat cards + table + progress bars |
-| Extra endpoints | None | `/dashboard`, `/health` |
-| Docker base | `python:3.9` | `python:3.9-slim` (smaller image) |
-| Gunicorn workers | 1 | 2 (better concurrency) |
-
 ---
 
 ## Monitoring & Logs
@@ -268,13 +235,6 @@ gcloud run services logs read cloud-run-lab \
   --project $PROJECT_ID \
   --limit 50
 ```
-
-### View in GCP Console
-
-1. Go to **Cloud Run** in the [GCP Console](https://console.cloud.google.com/run)
-2. Click **cloud-run-lab**
-3. Open the **Logs** tab for request logs
-4. Open the **Metrics** tab for CPU, memory, and latency graphs
 
 ---
 
@@ -312,6 +272,3 @@ This public BigQuery dataset contains license metadata for millions of open-sour
 | `repo_name` | STRING | GitHub repository name (owner/repo) |
 | `license` | STRING | SPDX license identifier (e.g. `mit`, `apache-2.0`) |
 
----
-
-## License
